@@ -141,7 +141,7 @@ function getError(error) {
 
 
 function sendScore(score) {
-    fetch(BASE_URL + '/home/score', {
+    fetch(BASE_URL + '/score', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
