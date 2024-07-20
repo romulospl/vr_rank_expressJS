@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/common/sweetalert2.js"></script>
+    <script src="/common/vue.global.prod.js"></script>
+    <script src="/common/axios.min.js"></script>
+    <script src="/common/moment.min.js"></script>
+    <link rel="stylesheet" href="/common/vuetify.min.css">
+    <script src="/common/vuetify.min.js"></script>
+    <title>Ranking</title>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main id="app">
+        <v-dialog v-model="dialog" max-width="400" persistent>
+            <v-form ref="formSaveScore" @submit.prevent="save">
+                <v-card prepend-icon="mdi-map-marker" title="Cadastrar pontuação">
+                    <v-card-text>
+                        <div class="m-auto">Pontuação: {{ rankItem.score }}</div>
+                        <v-text-field class="mt-2" v-model="rankItem.nickname" :rules="nameRules"
+                            label="Apelido"></v-text-field>
+                    </v-card-text>
+                    <template v-slot:actions>
+                        <v-spacer></v-spacer>
+                        <v-btn type="submit" color="primary">Salvar</v-btn>
+                    </template>
+                </v-card>
+            </v-form>
+        </v-dialog>
+        <!-- @update:options="loadItems" -->
+        <v-card max-width="800px" style="margin: auto;">
+            <v-card-title>
+                <div style="width: 100%;" class="d-flex justify-end mb-4">
+                    <!-- <v-btn @click="authorizeStartGame" color="primary">Autorizar inicio do jogo</v-btn> -->
+                </div>
+            </v-card-title>
+            <v-card-text>
+                <v-data-table-virtual height="600" fixed-header :loading="loading" :headers="headers" :items="listRank"
+                    density="compact" item-key="name">
+                    <template v-slot:item.rank="{ item, index }">
+                        <div style="max-width: 100px;">{{index + 1}}</div>
+                    </template>
+                    <template v-slot:item.datatime="{ item, index }">
+                        <div style="max-width: 100px;">{{ formatDate(item.createdAt) }}</div>
+                    </template>
+                </v-data-table-virtual>
+            </v-card-text>
+        </v-card>
+    </main>
+    <footer>
+
+    </footer>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"
+        integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="/common/socket.io.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/rank.js"></script>
+
+</body>
+
+</html>

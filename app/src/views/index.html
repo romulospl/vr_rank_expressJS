@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="/common/aframe.min.js"></script>
+  <script
+    src="/common/unpkg.com_aframe-environment-component@1.1.0_dist_aframe-environment-component.min.js"></script>
+  <!-- <script src="https://sustentabilidadevr.pages.dev/aframe-extras.misc.min.js"></script> -->
+  <script src="/common/super-hands.min.js"></script>
+  <script src="/common/aframe-extras.min.js"></script>
+  <title>Game</title>
+</head>
+
+<body>
+  <a-scene debug inspector="url: vendor/aframe-inspector.min.js">
+    <a-assets>
+      <a-asset-item id="plano" src="/assets/mapa/map.glb"></a-asset-item>
+      <a-asset-item id="start-button-model" src="assets/iniciar.glb"></a-asset-item>
+
+      <!-- <a-asset-item id="enviroment-model" src="/assets/road/scene.gltf"></a-asset-item> -->
+
+      <!-- auto_vr positivos -->
+      <a-asset-item id="aditivo-de-combustivel-model" src="/assets/positivos/aditivo-de-combustivel.glb"></a-asset-item>
+      <a-asset-item id="bateria-model" src="/assets/positivos/bateria.glb"></a-asset-item>
+      <a-asset-item id="correia-dentada-model" src="/assets/positivos/correia-dentada.glb"></a-asset-item>
+      <a-asset-item id="disco-de-freio-model" src="/assets/positivos/disco-de-freio.glb"></a-asset-item>
+      <a-asset-item id="filtro-de-ar-model" src="/assets/positivos/filtro-de-ar.glb"></a-asset-item>
+      <a-asset-item id="filtro-de-aro-condicionado-model"
+        src="/assets/positivos/filtro-de-aro-condicionado.glb"></a-asset-item>
+      <a-asset-item id="filtro-de-combustivel-model" src="/assets/positivos/filtro-de-combustivel.glb"></a-asset-item>
+      <!-- <a-asset-item id="filtro-de-oleo-model" src="/assets/positivos/filtro-de-oleo.glb"></a-asset-item> -->
+      <!-- <a-asset-item id="oleo-sintetico-model" src="/assets/positivos/oleo-sintetico.glb"></a-asset-item>
+      <a-asset-item id="pastilha-de-freio-model" src="/assets/positivos/pastilha-de-freio.glb"></a-asset-item>
+      <a-asset-item id="vela-de-ignicao-model" src="/assets/positivos/vela-de-ignicao.glb"></a-asset-item> -->
+
+      <!-- auto_vr negativo -->
+      <a-asset-item id="bateria-descarregada-model" src="/assets/negativo/bateria-descarregada.glb"></a-asset-item>
+      <a-asset-item id="correia-dentada-rompida-model"
+        src="/assets/negativo/correia-dentada-rompida.glb"></a-asset-item>
+      <a-asset-item id="disco-de-freio-deteriorado-model"
+        src="/assets/negativo/disco-de-freio-deteriorado.glb"></a-asset-item>
+      <a-asset-item id="filtro-de-ar-sujo-model" src="/assets/negativo/filtro-de-ar-sujo.glb"></a-asset-item>
+      <a-asset-item id="filtro-de-combustivel-abarrotado-model"
+        src="/assets/negativo/filtro-de-combustivel-abarrotado.glb"></a-asset-item>
+      <a-asset-item id="filtro-de-oleo-compurscado-model"
+        src="/assets/negativo/filtro-de-oleo-compurscado.glb"></a-asset-item>
+      <a-asset-item id="pastilha-de-freio-gasta-model"
+        src="/assets/negativo/pastilha-de-freio-gasta.glb"></a-asset-item>
+      <!-- <a-asset-item id="pneu-furado-model" src="/assets/negativo/pneu-furado.glb"></a-asset-item> -->
+      <!-- <a-asset-item id="radiador-quebrado-model" src="/assets/negativo/radiador-quebrado.glb"></a-asset-item>
+      <a-asset-item id="reservatorio-de-oleo-vazio-model"
+        src="/assets/negativo/reservatorio-de-oleo-vazio.glb"></a-asset-item>
+      <a-asset-item id="vela-de-ignicao-queimada-model"
+        src="/assets/negativo/vela-de-ignicao-queimada.glb"></a-asset-item> -->
+
+      <!-- auto_vr neutros -->
+      <a-asset-item id="cabo-de-bateria-model" src="/assets/neutros/cabo-de-bateria.glb"></a-asset-item>
+      <a-asset-item id="chave-de-roda-model" src="/assets/neutros/chave-de-roda.glb"></a-asset-item>
+      <a-asset-item id="extintor-de-incendio-model" src="/assets/neutros/extintor-de-incendio.glb"></a-asset-item>
+      <a-asset-item id="jogo-de-parafusos-model" src="/assets/neutros/jogo-de-parafusos.glb"></a-asset-item>
+      <a-asset-item id="luz-de-neve-model" src="/assets/neutros/luz-de-neve.glb"></a-asset-item>
+      <a-asset-item id="macaco-hidraulico-model" src="/assets/neutros/macaco-hidraulico.glb"></a-asset-item>
+      <!-- <a-asset-item id="manual-do-proprietario-model" src="/assets/neutros/manual-do-proprietario.glb"></a-asset-item> -->
+      <!-- <a-asset-item id="reservatorio-de-agua-model" src="/assets/neutros/reservatorio-de-agua.glb"></a-asset-item>
+      <a-asset-item id="spray-desengripante-model" src="/assets/neutros/spray-desengripante.glb"></a-asset-item>
+      <a-asset-item id="tapete-model" src="/assets/neutros/tapete.glb"></a-asset-item> -->
+
+      <!-- buttons -->
+      <a-asset-item id="button-a-model" src="/assets/botoes/a.glb"></a-asset-item>
+      <a-asset-item id="button-b-model" src="/assets/botoes/b.glb"></a-asset-item>
+      <a-asset-item id="button-c-model" src="/assets/botoes/c.glb"></a-asset-item>
+      <a-asset-item id="button-d-model" src="/assets/botoes/d.glb"></a-asset-item>
+
+      <!-- questions -->
+      <img id="q1-model" src="/assets/perguntas/q1.png" />
+      <img id="q2-model" src="/assets/perguntas/q2.png" />
+      <img id="q3-model" src="/assets/perguntas/q3.png" />
+      <img id="q4-model" src="/assets/perguntas/q4.png" />
+      <img id="q5-model" src="/assets/perguntas/q5.png" />
+      <img id="q6-model" src="/assets/perguntas/q6.png" />
+      <img id="q7-model" src="/assets/perguntas/q7.png" />
+      <img id="q8-model" src="/assets/perguntas/q8.png" />
+      <img id="q9-model" src="/assets/perguntas/q9.png" />
+      <img id="q10-model" src="/assets/perguntas/q10.png" />
+      <img id="q11-model" src="/assets/perguntas/q11.png" />
+      <img id="q12-model" src="/assets/perguntas/q12.png" />
+      <img id="q13-model" src="/assets/perguntas/q13.png" />
+      <img id="q14-model" src="/assets/perguntas/q14.png" />
+      <img id="q15-model" src="/assets/perguntas/q15.png" />
+      <img id="q16-model" src="/assets/perguntas/q16.png" />
+      <img id="q17-model" src="/assets/perguntas/q17.png" />
+      <img id="q18-model" src="/assets/perguntas/q18.png" />
+      <!-- <a-asset-item id="q1-model" src="/assets/perguntas/q1.glb"></a-asset-item>
+      <a-asset-item id="q2-model" src="/assets/perguntas/q2.glb"></a-asset-item>
+      <a-asset-item id="q3-model" src="/assets/perguntas/q3.glb"></a-asset-item>
+      <a-asset-item id="q4-model" src="/assets/perguntas/q4.glb"></a-asset-item> -->
+      <!-- <a-asset-item id="q5-model" src="/assets/perguntas/q5.glb"></a-asset-item>
+      <a-asset-item id="q6-model" src="/assets/perguntas/q6.glb"></a-asset-item>
+      <a-asset-item id="q7-model" src="/assets/perguntas/q7.glb"></a-asset-item>
+      <a-asset-item id="q8-model" src="/assets/perguntas/q8.glb"></a-asset-item>
+      <a-asset-item id="q9-model" src="/assets/perguntas/q9.glb"></a-asset-item>
+      <a-asset-item id="q10-model" src="/assets/perguntas/q10.glb"></a-asset-item>
+      <a-asset-item id="q11-model" src="/assets/perguntas/q11.glb"></a-asset-item>
+      <a-asset-item id="q12-model" src="/assets/perguntas/q12.glb"></a-asset-item>
+      <a-asset-item id="q13-model" src="/assets/perguntas/q13.glb"></a-asset-item>
+      <a-asset-item id="q14-model" src="/assets/perguntas/q14.glb"></a-asset-item>
+      <a-asset-item id="q15-model" src="/assets/perguntas/q15.glb"></a-asset-item>
+      <a-asset-item id="q16-model" src="/assets/perguntas/q16.glb"></a-asset-item>
+      <a-asset-item id="q17-model" src="/assets/perguntas/q17.glb"></a-asset-item>
+      <a-asset-item id="q18-model" src="/assets/perguntas/q18.glb"></a-asset-item> -->
+
+      <!-- caixotes -->
+      <a-asset-item id="cachote-correct-model" src="/assets/caixotes/caixotescheck.glb"></a-asset-item>
+      <a-asset-item id="cachote-wrong-model" src="/assets/caixotes/caixotesuncheck.glb"></a-asset-item>
+
+      <!-- mensagens -->
+      <a-asset-item id="desafio-concluido-model" src="/assets/mensagens/desafio-concluido.glb"></a-asset-item>
+      <a-asset-item id="tempo-esgotado-model" src="/assets/mensagens/tempo-esgotado.glb"></a-asset-item>
+
+      <!-- imagens -->
+      <img id="fundo-branco-model" src="/assets/images/fundo-branco.png" />
+
+      <!-- sons -->
+      <audio id="pontuado-sound-model" src="/assets/sounds/correct.wav" preload="auto"></audio>
+      <audio id="fundo-sound-model" src="/assets/sounds/fundo.mp3" preload="auto"></audio>
+      <audio id="wrong-sound-model" src="/assets/sounds/wrong.wav" preload="auto"></audio>
+      <audio id="tempo-restante-model" src="/assets/sounds/tempo-restante.wav" preload="auto"></audio>
+      <audio id="notification-model" src="/assets/sounds/notification.wav" preload="auto"></audio>
+      <audio id="sucess-model" src="/assets/sounds/sucess.wav" preload="auto"></audio>
+    </a-assets>
+
+    <!-- Camera -->
+    <a-camera id="camera">
+      <a-entity id="log" text="color: red; align: center; width: 0.5;" position="0 -0.0 -0.214"
+        visible="false"></a-entity>
+      <a-entity id="log2" text="color: red; align: center; width: 0.5;" position="0 -0.05 -0.214"
+        visible="false"></a-entity>
+
+      <a-image id="fundo-branco1" position="0.17516 0.09006 -0.7033" scale="0.05 0.03 0.06" src="#fundo-branco-model"
+        visible="true"></a-image>
+      <a-entity id="pontuacao" text="color: red; align: center ;width: 0.5; value: 0/10"
+        position="0.17516 0.09006 -0.7033" pontuacao></a-entity>
+
+      <a-image id="fundo-branco2" position="-0.17516 0.09006 -0.7033" scale="0.06 0.03 0.06" src="#fundo-branco-model"
+        visible="true"></a-image>
+      <a-entity id="tempo" text="color: red; align: center ;width: 0.5; value: " position="-0.17516 0.09006 -0.7033"
+        temporizador></a-entity>
+
+      <!-- mensagens -->
+      <a-entity id="msg-desafio-concluido" position="0 0 -3" scale="0.3 0.3 0.3" geometry="primitive: box;"
+        material="opacity: 0; color: red" visible="false">
+        <a-entity scale="0.2 0.2 0.2" position="-70.45365 -8.35514 36.71929"
+          gltf-model="#desafio-concluido-model"></a-entity>
+      </a-entity>
+
+      <a-entity id="msg-tempo-esgotado" position="0 0 -3" scale="0.3 0.3 0.3" geometry="primitive: box;"
+        material="opacity: 0; color: red" visible="false">
+        <a-entity scale="0.2 0.2 0.2" position="-82.45365 -8.45514 36.71929"
+          gltf-model="#tempo-esgotado-model"></a-entity>
+      </a-entity>
+
+    </a-camera>
+
+
+    <!-- Hands -->
+    <a-entity sphere-collider="objects: .target" super-hands hand-controls="hand: left"></a-entity>
+    <a-entity sphere-collider="objects: .target" super-hands hand-controls="hand: right"></a-entity>
+
+    <!-- Ambiente -->
+    <a-entity id="sky-enviroment" scale="20 20 20" environment="ground: none;"></a-entity>
+    <!-- <a-entity id="enviroment" scale="2.275 2.275 2.275" position="-2.026 -3.4115 -40.586" visible="true">
+      <a-entity id="enviroment1" gltf-model="#enviroment-model" position="1 1 -15.28183"></a-entity>
+      <a-entity id="enviroment2" gltf-model="#enviroment-model" position="1 1 26.252"></a-entity>
+    </a-entity> -->
+    <a-entity id="map-road1" scale="3.213 3.213 3.213" rotation="0 1.871 0" gltf-model="#plano"
+      position="2.712 -1.72 -12.79637"></a-entity>
+    <a-entity id="map-road2" scale="3.213 3.213 3.213" rotation="0 1.2593612336975495 0" gltf-model="#plano"
+      position="2.00824 -1.72 -43.2405"></a-entity>
+    <a-entity id="map-road3" scale="3.213 3.213 3.213" rotation="0 1.843205226935858 0" gltf-model="#plano"
+      position="1.02801 -1.8 -74.25061"></a-entity>
+    <!-- <a-entity id="map-road3" scale="3.213 3.213 3.213" rotation="0 1.843205226935858 0" gltf-model="#plano"
+      position="1.02801 -1.8 -72.38249"></a-entity> -->
+    <!-- <a-entity id="map-road4" scale="3.06337 2.96337 2.96337" rotation="0 -178.75882137625095 0" gltf-model="#plano"
+      position="-5.10011 -1.55 -77.92056"></a-entity> -->
+    <a-light id="light1" light="intensity: 1.92" scale="0.829 0.829 0.829" position="-0.031 1.884 0.73984"
+      rotation="117.251 84.993 -117.162"></a-light>
+
+    <!-- Game -->
+    <a-entity id="game">
+      <a-entity id="button-start" scale="0.266 0.266 0.266" rotation="0.257 -91.928 -11.618" animation-mixer
+        gltf-model="#start-button-model" position="-0.003 0.7 -0.49497"></a-entity>
+      <a-box id="button-start-contato" class="target" start-button rotation="37.329346268363395 0 0"
+        scale="0.21585 0.22467 0.21585" position="0 0.831 -0.46235" material="opacity: 0"></a-box>
+
+      <!-- Goal Left -->
+      <a-entity id="goal-left" scale="0.57972 0.57972 0.57972" class="target" position="-0.897 1.345 -1.053"
+        goal-object="toPosition: -1.12442 1.42 4.935; caixaSustentavel: #caixote-sustentavel-left; caixaNaoSustentavel: #caixote-nao-sustentavel-left"
+        color="red" geometry="primitive: box;" material="opacity: 0; color: red" collision-system="area: #scape-left;">
+
+        <!-- modelos positivos -->
+        <a-entity id="aditivo-de-combustivel-left" scale="0.243 0.243 0.243" gltf-model="#aditivo-de-combustivel-model"
+          position="-15.99436 -10.4572 -0.13382" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="bateria-left" scale="0.243 0.243 0.243" gltf-model="#bateria-model" position="-11.375 -10.538 0"
+          visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="correia-dentada-left" scale="0.243 0.243 0.243" gltf-model="#correia-dentada-model"
+          position="-14.455 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="disco-de-freio-left" scale="0.243 0.243 0.243" gltf-model="#disco-de-freio-model"
+          position="-9.845 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-ar-left" scale="0.243 0.243 0.243" gltf-model="#filtro-de-ar-model"
+          position="-4.925 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-aro-condicionado-left" scale="0.243 0.243 0.243"
+          gltf-model="#filtro-de-aro-condicionado-model" position="-6.355 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-combustivel-left" scale="0.243 0.243 0.243" gltf-model="#filtro-de-combustivel-model"
+          position="-3.385 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <!-- <a-entity id="filtro-de-oleo-left" scale="0.243 0.243 0.243" gltf-model="#filtro-de-oleo-model"
+          position="-1.545 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+        <!-- <a-entity id="oleo-sintetico-left" scale="0.243 0.243 0.243" gltf-model="#oleo-sintetico-model"
+          position="0.02885 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="pastilha-de-freio-left" scale="0.243 0.243 0.243" gltf-model="#pastilha-de-freio-model"
+          position="-8.251 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="vela-de-ignicao-left" scale="0.243 0.243 0.243" gltf-model="#vela-de-ignicao-model"
+          position="-12.961 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+
+        <!-- Modelos negativos -->
+        <a-entity id="bateria-descarregada-left" scale="0.243 0.243 0.243" gltf-model="#bateria-descarregada-model"
+          position="-8.271 -14.682 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="disco-de-freio-deteriorado-left" scale="0.243 0.243 0.243"
+          gltf-model="#disco-de-freio-deteriorado-model" position="-4.951 -14.852 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-ar-sujo-left" scale="0.243 0.243 0.243" gltf-model="#filtro-de-ar-sujo-model"
+          position="-15.951 -14.642 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-combustivel-abarrotado-left" scale="0.243 0.243 0.243"
+          gltf-model="#filtro-de-combustivel-abarrotado-model" position="-3.321 -14.802 -0.08" visible="true"
+          data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-oleo-compurscado-left" scale="0.243 0.243 0.243"
+          gltf-model="#filtro-de-oleo-compurscado-model" position="-1.581 -14.802 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="pastilha-de-freio-gasta-left" scale="0.243 0.243 0.243"
+          gltf-model="#pastilha-de-freio-gasta-model" position="-6.461 -14.802 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <!-- <a-entity id="pneu-furado-left" scale="0.243 0.243 0.243" gltf-model="#pneu-furado-model"
+          position="0.039 -14.702 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+        <!-- <a-entity id="radiador-quebrado-left" scale="0.243 0.243 0.243" gltf-model="#radiador-quebrado-model"
+          position="-14.391 -14.702 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="reservatorio-de-oleo-vazio-left" scale="0.243 0.243 0.243"
+          gltf-model="#reservatorio-de-oleo-vazio-model" position="-12.861 -14.702 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="vela-de-ignicao-queimada-left" scale="0.243 0.243 0.243"
+          gltf-model="#vela-de-ignicao-queimada-model" position="-11.361 -14.882 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+
+        <!-- Modelos neutros -->
+        <a-entity id="cabo-de-bateria-left" scale="0.243 0.243 0.243" gltf-model="#cabo-de-bateria-model"
+          position="-6.381 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="chave-de-roda-left" scale="0.243 0.243 0.243" gltf-model="#chave-de-roda-model"
+          position="-1.561 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="extintor-de-incendio-left" scale="0.243 0.243 0.243" gltf-model="#extintor-de-incendio-model"
+          position="-11.381 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="jogo-de-parafusos-left" scale="0.243 0.243 0.243" gltf-model="#jogo-de-parafusos-model"
+          position="-12.921 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="luz-de-neve-left" scale="0.243 0.243 0.243" gltf-model="#luz-de-neve-model"
+          position="-9.771 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="macaco-hidraulico-left" scale="0.243 0.243 0.243" gltf-model="#macaco-hidraulico-model"
+          position="-3.301 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <!-- <a-entity id="manual-do-proprietario-left" scale="0.243 0.243 0.243" gltf-model="#manual-do-proprietario-model"
+          position="0.049 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+        <!-- <a-entity id="reservatorio-de-agua-left" scale="0.243 0.243 0.243" gltf-model="#reservatorio-de-agua-model"
+          position="-14.421 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="spray-desengripante-left" scale="0.243 0.243 0.243" gltf-model="#spray-desengripante-model"
+          position="-8.251 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="tapete-left" scale="0.243 0.243 0.243" gltf-model="#tapete-model" position="-4.871 -11.982 -0.08"
+          visible="true" data-value="1">
+        </a-entity> -->
+
+      </a-entity>
+
+      <!-- Teste de goal -->
+      <!-- <a-entity id="goal-tester" scale="0.58 0.58 0.58" position="0.30766 1.345 -1.89042" color="red"
+        geometry="primitive: box;" material="opacity: 0.3; color: green">
+
+        <a-entity id="extintor-de-incendio-left" scale="0.243 0.243 0.243" gltf-model="#extintor-de-incendio-model"
+          position="-11.381 1.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+
+      </a-entity> -->
+
+      <!-- Goal Right -->
+      <a-entity id="goal-right" scale="0.57972 0.57972 0.57972" class="target" position="-0.897 1.345 -1.053"
+        goal-object="toPosition: 1.12442 1.42 4.935; caixaSustentavel: #caixote-sustentavel-right; caixaNaoSustentavel: #caixote-nao-sustentavel-right"
+        color="blue" geometry="primitive: box;" material="opacity: 0; color: red"
+        collision-system="area: #scape-right;">
+
+        <!-- modelos positivos -->
+        <a-entity id="aditivo-de-combustivel-right" scale="0.243 0.243 0.243" gltf-model="#aditivo-de-combustivel-model"
+          position="-15.99436 -10.4572 -0.13382" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="bateria-right" scale="0.243 0.243 0.243" gltf-model="#bateria-model" position="-11.375 -10.538 0"
+          visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="correia-dentada-right" scale="0.243 0.243 0.243" gltf-model="#correia-dentada-model"
+          position="-14.455 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="disco-de-freio-right" scale="0.243 0.243 0.243" gltf-model="#disco-de-freio-model"
+          position="-9.845 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-ar-right" scale="0.243 0.243 0.243" gltf-model="#filtro-de-ar-model"
+          position="-4.925 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-aro-condicionado-right" scale="0.243 0.243 0.243"
+          gltf-model="#filtro-de-aro-condicionado-model" position="-6.355 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-combustivel-right" scale="0.243 0.243 0.243" gltf-model="#filtro-de-combustivel-model"
+          position="-3.385 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <!-- <a-entity id="filtro-de-oleo-right" scale="0.243 0.243 0.243" gltf-model="#filtro-de-oleo-model"
+          position="-1.545 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+        <!-- <a-entity id="oleo-sintetico-right" scale="0.243 0.243 0.243" gltf-model="#oleo-sintetico-model"
+          position="0.02885 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="pastilha-de-freio-right" scale="0.243 0.243 0.243" gltf-model="#pastilha-de-freio-model"
+          position="-8.251 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="vela-de-ignicao-right" scale="0.243 0.243 0.243" gltf-model="#vela-de-ignicao-model"
+          position="-12.961 -10.528 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+
+        <!-- Modelos negativos -->
+        <a-entity id="bateria-descarregada-right" scale="0.243 0.243 0.243" gltf-model="#bateria-descarregada-model"
+          position="-8.271 -14.682 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="disco-de-freio-deteriorado-right" scale="0.243 0.243 0.243"
+          gltf-model="#disco-de-freio-deteriorado-model" position="-4.951 -14.852 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-ar-sujo-right" scale="0.243 0.243 0.243" gltf-model="#filtro-de-ar-sujo-model"
+          position="-15.951 -14.642 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-combustivel-abarrotado-right" scale="0.243 0.243 0.243"
+          gltf-model="#filtro-de-combustivel-abarrotado-model" position="-3.321 -14.802 -0.08" visible="true"
+          data-value="1">
+        </a-entity>
+        <a-entity id="filtro-de-oleo-compurscado-right" scale="0.243 0.243 0.243"
+          gltf-model="#filtro-de-oleo-compurscado-model" position="-1.581 -14.802 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="pastilha-de-freio-gasta-right" scale="0.243 0.243 0.243"
+          gltf-model="#pastilha-de-freio-gasta-model" position="-6.461 -14.802 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <!-- <a-entity id="pneu-furado-right" scale="0.243 0.243 0.243" gltf-model="#pneu-furado-model"
+          position="0.039 -14.702 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+        <!-- <a-entity id="radiador-quebrado-right" scale="0.243 0.243 0.243" gltf-model="#radiador-quebrado-model"
+          position="-14.391 -14.702 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="reservatorio-de-oleo-vazio-right" scale="0.243 0.243 0.243"
+          gltf-model="#reservatorio-de-oleo-vazio-model" position="-12.861 -14.702 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="vela-de-ignicao-queimada-right" scale="0.243 0.243 0.243"
+          gltf-model="#vela-de-ignicao-queimada-model" position="-11.361 -14.882 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+
+        <!-- Modelos neutros -->
+        <a-entity id="cabo-de-bateria-right" scale="0.243 0.243 0.243" gltf-model="#cabo-de-bateria-model"
+          position="-6.381 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="chave-de-roda-right" scale="0.243 0.243 0.243" gltf-model="#chave-de-roda-model"
+          position="-1.561 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="extintor-de-incendio-right" scale="0.243 0.243 0.243" gltf-model="#extintor-de-incendio-model"
+          position="-11.381 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="jogo-de-parafusos-right" scale="0.243 0.243 0.243" gltf-model="#jogo-de-parafusos-model"
+          position="-12.921 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="luz-de-neve-right" scale="0.243 0.243 0.243" gltf-model="#luz-de-neve-model"
+          position="-9.771 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="macaco-hidraulico-right" scale="0.243 0.243 0.243" gltf-model="#macaco-hidraulico-model"
+          position="-3.301 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <!-- <a-entity id="manual-do-proprietario-right" scale="0.243 0.243 0.243" gltf-model="#manual-do-proprietario-model"
+          position="0.049 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity> -->
+        <!-- <a-entity id="reservatorio-de-agua-right" scale="0.243 0.243 0.243" gltf-model="#reservatorio-de-agua-model"
+          position="-14.421 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="spray-desengripante-right" scale="0.243 0.243 0.243" gltf-model="#spray-desengripante-model"
+          position="-8.251 -11.982 -0.08" visible="true" data-value="1">
+        </a-entity>
+        <a-entity id="tapete-right" scale="0.243 0.243 0.243" gltf-model="#tapete-model" position="-4.871 -11.982 -0.08"
+          visible="true" data-value="1">
+        </a-entity> -->
+      </a-entity>
+
+      <!-- container com as perguntas -->
+      <a-entity id="quadro-de-questionario"
+        question-squad="initialPosition: -0.379 -2.169 -2.35106; positionFinal: -0.379 2.169 -2.35106;"
+        geometry="primitive: box;" material="color:blue; opacity: 0;" position="-0.379 2.169 -2.35106">
+
+        <!-- Qual é a principal vantagem das pastilhas de freio ACDelco em relação às pastilhas de marcas genéricas? -->
+        <a-image id="question1" scale="4.50982 1.44044 1.44044" src="#q1-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- Os filtros de combustível ACDelco são projetados para oferecer o quê? -->
+        <a-image id="question2" scale="4.50982 1.44044 1.44044" src="#q2-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- Qual é a função principal do filtro de ar ACDelco? -->
+        <a-image id="question3" scale="4.50982 1.44044 1.44044" src="#q3-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- Por que a ACDelco é uma escolha confiável para baterias automotivas? -->
+        <a-image id="question4" scale="4.50982 1.44044 1.44044" src="#q4-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- Quais são os benefícios de usar óleo ACDelco em seu veículo? -->
+        <a-image id="question5" scale="4.50982 1.44044 1.44044" src="#q5-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- Qual a característica das velas de ignição ACDelco que as tornam superiores? -->
+        <a-image id="question6" scale="4.50982 1.44044 1.44044" src="#q6-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- As correias dentadas ACDelco são conhecidas por: -->
+        <a-image id="question7" scale="4.50982 1.44044 1.44044" src="#q7-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- Qual é a principal vantagem do filtro de ar condicionado ACDelco? -->
+        <a-image id="question8" scale="4.50982 1.44044 1.44044" src="#q8-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- Qual piloto da Stock Car é o garoto propaganda da ACDelco? -->
+        <a-image id="question9" scale="4.50982 1.44044 1.44044" src="#q9-model" position="0.57062 -10 0" visible="true"
+          data-value="1">
+        </a-image>
+
+        <!-- Por que é importante usar peças ACDelco no seu veículo? -->
+        <a-image id="question10" scale="4.50982 1.44044 1.44044" src="#q10-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+        <!-- O que distingue as pastilhas de freio ACDelco das demais? -->
+        <a-image id="question11" scale="4.50982 1.44044 1.44044" src="#q11-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+        <!-- Quais benefícios os discos de freio ACDelco proporcionam? -->
+        <a-image id="question12" scale="4.50982 1.44044 1.44044" src="#q12-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+        <!-- Por que as baterias ACDelco são consideradas uma escolha confiável? -->
+        <a-image id="question13" scale="4.50982 1.44044 1.44044" src="#q13-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+        <!-- Qual é a principal função do filtro de óleo ACDelco? -->
+        <a-image id="question14" scale="4.50982 1.44044 1.44044" src="#q14-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+        <!-- Quais são os benefícios das velas de ignição ACDelco? -->
+        <a-image id="question15" scale="4.50982 1.44044 1.44044" src="#q15-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+        <!-- O que torna os filtros de combustível ACDelco uma escolha segura? -->
+        <a-image id="question16" scale="4.50982 1.44044 1.44044" src="#q16-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+        <!-- As correias dentadas ACDelco são projetadas para: -->
+        <a-image id="question17" scale="4.50982 1.44044 1.44044" src="#q17-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+        <!-- Qual é a principal vantagem dos filtros de ar ACDelco? -->
+        <a-image id="question18" scale="4.50982 1.44044 1.44044" src="#q18-model" position="0.57062 -10 0"
+          visible="true" data-value="1">
+        </a-image>
+
+      </a-entity>
+
+      <!-- buttons de respostas -->
+      <a-entity id="button-a" class="target" material="color:red;opacity: 0" scale="0.16 0.16 0.16"
+        button-resposta-question="value: A;positionTarget: -0.73828 0.845 -0.09164 ;positionInit: -0.73828 -10.845 -0.09164 ;"
+        geometry="primitive: box;" position="-0.73828 -10.845 -0.09164">
+        <a-entity id="button-a-3d" rotation="-24.83199084096988 30.969514742411256 -14.145755003984895"
+          scale="0.13036 0.13036 0.13036" gltf-model="#button-a-model" position="-0.08665 3.2059 -1.89873"
+          visible="true" data-value="1">
+        </a-entity>
+      </a-entity>
+      <a-entity id="button-b" class="target" material="color:green;opacity: 0" scale="0.16 0.16 0.16"
+        button-resposta-question="value: B;positionTarget: -0.30219 0.845 -0.44583;positionInit:-0.30219 -10.845 -0.44583 ;"
+        geometry="primitive: box;" position="-0.302 0.845 -0.446">
+        <a-entity id="button-b-3d" rotation="-28.354535365434177 0 0" scale="0.13036 0.13036 0.13036"
+          gltf-model="#button-b-model" position="-1.21302 3.10945 -1.84189" visible="true" data-value="1">
+        </a-entity></a-entity>
+      <a-entity id="button-c" class="target" material="color:blue;opacity: 0" scale="0.16024 0.16024 0.16024"
+        button-resposta-question="value: C;positionTarget: 0.35496 0.84514 -0.44545;positionInit:0.35496 -10.84514 -0.44545 ;"
+        geometry="primitive: box;" position="0.35496 -10.84514 -0.44545">
+        <a-entity id="button-c-3d" rotation="-28.354535365434177 0 0" scale="0.13036 0.13036 0.13036"
+          gltf-model="#button-c-model" position="-2.27898 3.19704 -1.859" visible="true" data-value="1">
+        </a-entity>
+      </a-entity>
+      <a-entity id="button-d" class="target" material="color:yellow;opacity: 0" scale="0.16024 0.16024 0.16024"
+        button-resposta-question="value: D;positionTarget: 0.77978 0.84514 -0.05881;positionInit: 0.77978 -10.84514 -0.05881;"
+        geometry="primitive: box;" position="0.77978 -10.84514 -0.05881">
+        <a-entity id="button-d-3d" rotation="-28.354535365434177 -25.428439905701065 0" scale="0.13036 0.13036 0.13036"
+          gltf-model="#button-d-model" position="-1.99952 3.20446 -3.25338" visible="true" data-value="1">
+        </a-entity>
+      </a-entity>
+
+      <!-- pontos de sensibilidade de escape -->
+      <a-entity id="scape-left" geometry="primitive: box;" position="-1.12442 1.42 4.935"
+        material="opacity: 0; color: blue"></a-entity>
+      <a-entity id="scape-right" geometry="primitive: box;" position="1.12442 1.42 4.935"
+        material="opacity: 0; color: orange"></a-entity>
+
+      <!-- pontos de sensibilidade do caixote sustentável -->
+      <a-entity id="caixote-sustentavel-left" rotation="0 48.31 0" scale="0.555 0.555 0.555" geometry="primitive: box;"
+        material="opacity: 0; color: green" position="0.52253 0.055 -0.09561"
+        collision-system="area: #goal-left;"></a-entity>
+      <a-entity id="caixote-sustentavel-right" rotation="0 48.31 0" scale="0.555 0.555 0.555" scale="0.555 0.555 0.555"
+        geometry="primitive: box;" material="opacity: 0; color: green" position="0.523 0.055 -0.096"
+        collision-system="area: #goal-right;"></a-entity>
+
+      <!-- pontos de sensibilidade do caixote NÃO sustentável -->
+      <a-entity id="caixote-nao-sustentavel-left" rotation="0 -62.24212415844672 0" scale="0.555 0.555 0.555"
+        geometry="primitive: box;" material="opacity: 0; color: red" position="-0.82853 0.055 -0.174"
+        collision-system="area: #goal-left;"></a-entity>
+      <a-entity id="caixote-nao-sustentavel-right" rotation="0 -62.24212415844672 0" scale="0.555 0.555 0.555"
+        geometry="primitive: box;" material="opacity: 0; color: red" position="-0.82853 0.055 -0.174"
+        collision-system="area: #goal-right;"></a-entity>
+
+
+      <!-- modelo caixote -->
+      <a-entity id="caixote-correct" rotation="0 -40.347687933112574 0" scale="0.015 0.015 0.015"
+        gltf-model="#cachote-correct-model" position="-3.31583 -0.146 -0.36083"></a-entity>
+      <a-entity id="caixote-wrong" rotation="0 33.082 0" scale="0.015 0.015 0.015" gltf-model="#cachote-wrong-model"
+        position="-3.18398 -0.146 4.19839"></a-entity>
+
+      <!-- armazenagem de dados -->
+      <a-entity id="store-valor-left" value="0"></a-entity>
+
+      <!-- sons -->
+      <a-entity id="pontuado-som" sound="src: #pontuado-sound-model;"></a-entity>
+      <a-entity id="fundo-sound"></a-entity>
+      <a-entity id="wrong-sound" sound="src: #wrong-sound-model;volume: 0.5"></a-entity>
+      <a-entity id="tempo-restante-sound" sound="src: #tempo-restante-model;volume: 0.5;"></a-entity>
+      <a-entity id="notification-sound" sound="src: #notification-model;volume: 0.5;"></a-entity>
+      <a-entity id="sucess-sound" sound="src: #sucess-model;volume: 0.5;"></a-entity>
+
+    </a-entity>
+
+  </a-scene>
+  <script src="/js/index.js"></script>
+</body>
+
+</html>
